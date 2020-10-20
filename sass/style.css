@@ -1,0 +1,269 @@
+/*Font-size*/
+/*Common colors */
+body {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+p {
+  margin: 0;
+}
+
+header {
+  border-width: 1px 0 1px 0;
+  border-style: solid;
+  border-color: #ddd;
+  padding: 10px;
+}
+
+header p {
+  display: inline-block;
+}
+
+header p:first-child {
+  font-size: 20px;
+  color: #212121;
+  width: 50%;
+}
+
+header .cart {
+  background: #7dbb46;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.section {
+  margin: 20px;
+  float: left;
+  width: 70%;
+}
+
+.section .item-container {
+  width: 31%;
+  border: 1px solid #ddd;
+  float: left;
+  margin-right: 20px;
+}
+
+.section .item-container:last-child {
+  margin-right: 0;
+}
+
+.section .item-container .top-section {
+  position: relative;
+}
+
+.section .item-container .top-section img {
+  width: 100%;
+}
+
+.section .item-container .top-section .discount-price {
+  position: absolute;
+  top: 20px;
+  background: #7dbb46;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 15px;
+}
+
+.section .item-container .bottom-section {
+  width: 93%;
+  float: left;
+  padding: 10px;
+  position: relative;
+}
+
+.section .item-container .bottom-section div {
+  width: 50%;
+  float: left;
+}
+
+.section .item-container .bottom-section div:first-child .item {
+  text-transform: capitalize;
+  margin-bottom: 5px;
+}
+
+.section .item-container .bottom-section div:first-child .actual-price {
+  color: red;
+  text-decoration: line-through;
+}
+
+.section .item-container .bottom-section div:first-child .actual-price span {
+  color: #212121;
+}
+
+.section .item-container .bottom-section div:first-child .discount-price {
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.section .item-container .bottom-section .add-to-cart {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.section .item-container .bottom-section .add-to-cart button {
+  background: transparent;
+  border: 1px solid #7dbb46;
+  padding: 5px;
+  border-radius: 0;
+  text-transform: capitalize;
+  float: right;
+  cursor: pointer;
+}
+
+.section .item-container .bottom-section .add-to-cart button:disabled {
+  cursor: not-allowed !important;
+}
+
+aside {
+  width: 27%;
+  float: left;
+  margin: 20px 0;
+}
+
+aside .top-container .header {
+  border-width: 1px 0 0  0;
+  border-style: solid;
+  border-color: #ddd;
+}
+
+aside .top-container p {
+  display: inline-block;
+  width: 32%;
+  padding: 20px 0;
+}
+
+aside .top-container p:first-child, aside .top-container p:nth-child(2) {
+  width: 40%;
+}
+
+aside .top-container p:last-child {
+  width: 17%;
+}
+
+aside .items-display-container {
+  padding: 20px 0;
+  border-width: 1px 0 1px  0;
+  border-style: solid;
+  border-color: #ddd;
+}
+
+aside .items-display-container button {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  position: relative;
+  top: 3px;
+  cursor: pointer;
+}
+
+aside .items-display-container input {
+  width: 30px;
+  text-align: center;
+  width: 40px;
+  text-align: center;
+  height: 40px;
+  margin-bottom: 0;
+  border-width: 1px 1px 1px  1px;
+  border-style: solid;
+  border-color: #ddd;
+}
+
+aside .items-display-container .cart ul li {
+  border: 1px solid #ddd;
+  padding: 10px 5px;
+}
+
+aside .items-display-container .cart ul li span img {
+  width: 20px;
+  position: relative;
+  top: 3px;
+}
+
+aside .items-display-container .cart ul li span:last-child {
+  margin-left: 10px;
+}
+
+aside .items-display-container .cart, aside .items-display-container .qty {
+  width: 40%;
+  display: inline-block;
+}
+
+aside .items-display-container .price {
+  width: 17%;
+  display: inline-block;
+  list-style-type: none;
+  font-weight: bold;
+}
+
+aside .items-display-container .price ul li {
+  height: 44px;
+}
+
+aside .items-display-container ul {
+  padding: 0;
+  margin: 0;
+}
+
+aside .items-display-container ul li {
+  list-style-type: none;
+  margin-bottom: 20px;
+}
+
+aside .total-container {
+  border: 1px solid #ddd;
+  margin-top: 30px;
+}
+
+aside .total-container h1 {
+  margin: 10px 20px;
+}
+
+aside .total-container div {
+  margin: 10px 24px;
+}
+
+aside .total-container div span {
+  width: 50%;
+  display: inline-block;
+}
+
+aside .total-container div span:last-child {
+  text-align: right;
+}
+
+aside .total-container .order-total {
+  background: #f5f5f5;
+  padding: 10px 24px;
+  margin: 0;
+}
+
+@media only screen and (max-width: 1300px) {
+  .section {
+    margin: 0;
+    width: 100%;
+  }
+  aside {
+    width: 40%;
+    margin: 20px 20px;
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+  .section .item-container {
+    width: 100%;
+    
+  }
+
+  aside {
+    width: 95%;
+    margin: 0;
+    padding: 0 10px;
+  }
+}
