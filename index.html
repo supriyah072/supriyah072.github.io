@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Cart Application</title>
+    <script src="../js/jquery.js"></script>
+    <link href="../sass/style.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+
+<body>
+
+    <div class="maincontainer">
+        <!--Header Section-->
+        <header>
+            <p>All Items</p>
+            <p id="itemsaddedtocart" class="cart">Items 0</p>
+        </header>
+
+        <!--Products Section-->
+        <div class="section"></div>
+
+        <!--Cart Section-->
+        <aside>
+            <div class="top-container">
+                <div class="header">
+                    <p>item <span>( </span><span id="value">0</span>) </p>
+                    <p>QTY</p>
+                    <p>Price</p>
+                </div>
+                <div class="items-display-container">
+                    <div class="cart">
+                        <ul id="cartitems">
+
+                        </ul>
+
+                    </div>
+                    <div class="qty">
+                        <ul id="itemsqty">
+
+                        </ul>
+                    </div>
+
+                    <div class="price">
+                        <ul id="priceitems">
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--Total Section-->
+            <div class="total-container">
+                <h1>Total</h1>
+                <div class=""><span>Items</span><span id="totalamount"></span></div>
+                <div class=""><span>Discount</span><span id="discount"></span></div>
+                <div class="order-total"><span>Order Total</span><span id="ordertotal"></span></div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        const itemscount = [];
+        const totalpriceitems = [];
+        const discountprice = [];
+
+        const reducer = (accumulator, currentValue) => accumulator + currentValue;
+        const reducer1 = (accumulator, currentValue) => accumulator - currentValue;
+        const itemcount1 = 0;
+        const itemcount2 = 0;
+        const itemcount3 = 0;
+
+        $(document).ready(function () {
+
+            let books = [
+                {
+                    "id": 1,
+                    "img": "img1",
+                    "name": "book1",
+                    "actual_price": 400,
+                    "discount_price": 170,
+                    "discount_precentage": 12,
+                    "display_message": "Item1 is added to cart",
+                    "quantity": 1
+
+                },
+                {
+                    "id": 2,
+                    "img": "img2",
+                    "name": "book2",
+                    "actual_price": 300,
+                    "discount_price": 130,
+                    "discount_precentage": 12,
+                    "display_message": "Item2 is addedto cart",
+                    "quantity": 1
+                },
+                {
+                    "id": 3,
+                    "img": "img3",
+                    "name": "book3",
+                    "actual_price": 500,
+                    "discount_price": 100,
+                    "discount_precentage": 12,
+                    "display_message": "Item3 is addedto cart",
+                    "quantity": 1
+                },
+            ];
+
+
+            books.map((book) => {
+                const productdetails = '<div class="item-container"><div class="top-section"><p class="discount-price"> ' + book.discount_price + '<span>% off</span></p><p><img src="../images/book.png" alt="book" /></p></div><div class="bottom-section"><div class=""><p class="item">' + book.name + '</p><p><span class="actual-price"><span>$200</span></span> <span class="discount-price">' + book.actual_price + '</span></p></div><div class="add-to-cart"><button id=' + book.id + '>add to cart</button></div></div></div>';
+                $('.section').append(productdetails);
+
+
+            });
+
+
+
+            const el = document.getElementsByTagName('button');
+            if (el) {
+                el[0].addEventListener('click', function () {
+                    addToCart(1);
+                }, false);
+                el[1].addEventListener('click', function () {
+                    addToCart(2);
+                }, false);
+                el[2].addEventListener('click', function () {
+                    addToCart(3);
+                }, false);
+            }
+
+
+
+            function addToCart(id) {
+                let book = books
+                    .find(x => x.id === id);
+
+
+
+                document.getElementById('itemsaddedtocart').innerHTML = book.display_message;
+                itemscount.push(book.id);
+                document.getElementById('value').innerHTML = itemscount.length;
+                document.getElementById(book.id).disabled = true;
+
+                const cartdetails = ' <li  id=' + book.id + '><span><img src="../images/book.png" alt="book"></span><span>' + book.name + '</span></li>';
+                $('#cartitems').append(cartdetails);
+                const itemsqtydetails = '<li> <button id="desc' + book.id + '">-</button><input type="text" value="0" id="inc' + book.id + '"/><button id="incr' + book.id + '">+</button></li>';
+                $('#itemsqty').append(itemsqtydetails);
+                const pricedetails = ' <li id=' + book.id + '>' + book.actual_price + '</li>';
+                $('#priceitems').append(pricedetails);
+
+                document.getElementById('incr' + book.id).addEventListener("click", function () {
+                    incrementCounter(book.id);
+                }, false);
+                document.getElementById('desc' + book.id).addEventListener("click", function () {
+                    decrementCounter(book.id);
+                }, false);
+
+                document.getElementById('inc' + id).value = 1;
+                const price = book.actual_price;
+                const qty = 1;
+
+                const totalvalue = price * qty;
+                totalpriceitems.push(totalvalue);
+
+                discountprice.push(book.discount_price);
+                const finalprice = totalpriceitems.reduce(reducer);
+
+                document.getElementById('totalamount').innerHTML = finalprice;
+                const finaldiscountprice = discountprice.reduce(reducer);
+
+                document.getElementById('discount').innerHTML = finaldiscountprice;
+
+                const totalorder = finalprice - finaldiscountprice;
+                document.getElementById('ordertotal').innerHTML = totalorder;
+            }
+
+
+
+            /*Icrement Function */
+            function incrementCounter(id) {
+                var count = document.getElementById('inc' + id).value;
+                count++;
+                document.getElementById('inc' + id).value = count;
+                let item = books
+                    .find(x => x.id === id);
+                const price = item.actual_price;
+
+
+                const totalvalue = price * 1;
+                totalpriceitems.push(totalvalue);
+
+                discountprice.push(item.discount_price);
+                const finalprice = totalpriceitems.reduce(reducer);
+
+                document.getElementById('totalamount').innerHTML = finalprice;
+
+                const finaldiscountprice = discountprice.reduce(reducer);
+                document.getElementById('discount').innerHTML = finaldiscountprice;
+
+                const totalorder = finalprice - finaldiscountprice;
+                document.getElementById('ordertotal').innerHTML = totalorder;
+            }
+
+            /*Decrement Function */
+            function decrementCounter(id) {
+                var count = document.getElementById('inc' + id).value;
+                if (count > 1) {
+
+                    count--;
+                    document.getElementById('inc' + id).value = count;
+
+
+                    let item = books
+                        .find(x => x.id === id);
+                    const price = item.actual_price;
+
+                    const totalvalue = price * 1;
+                    const finalvalue = 0 - totalvalue;
+
+                    totalpriceitems.push(finalvalue);
+
+                    discountprice.pop(item.discount_price);
+
+                    const finalprice = totalpriceitems.reduce(reducer);
+
+                    document.getElementById('totalamount').innerHTML = finalprice;
+                    const finaldiscountprice = discountprice.length > 0 ? discountprice.reduce(reducer) : 0;
+                    document.getElementById('discount').innerHTML = finaldiscountprice;
+
+                    const totalorder = finalprice - finaldiscountprice;
+                    document.getElementById('ordertotal').innerHTML = totalorder;
+
+
+                }
+
+            }
+
+
+
+
+        });
+    </script>
+</body>
+
+</html>
